@@ -1,15 +1,18 @@
-package mai
+package main
 
 import (
-	"go-auth/config"
-	"go-auth/database"
-	"go-auth/server"
+	"go-auth/models"
+	"log"
 )
 
 func main() {
-	config.Init()
+	// config.Init()
 
-	database.StartDatabase()
-	s := server.NewServer()
-	s.Run()
+	// database.StartDatabase()
+	// s := server.NewServer()
+	// s.Run()
+
+	va := models.NewUser("yuri", "yuri.snp@hotmail.com", "123456")
+	log.Print(va.String())
+
 }

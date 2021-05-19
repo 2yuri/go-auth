@@ -6,8 +6,8 @@ import (
 )
 
 type UserRepository interface {
-	Get(id uint) (*models.User, error)
-	Create(dto user.UserNewDTO) (*models.User, error)
+	Get(id uint) (models.User, error)
+	Create(dto user.UserNewDTO) (models.User, error)
 	Edit(dto user.UserEditDTO) error
 	Delete(id uint) error
 }

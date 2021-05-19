@@ -23,7 +23,6 @@ func main() {
 
 	//Add seeders files
 	path := []string{
-		basepath + "/files/roles.sql",
 		basepath + "/files/users.sql",
 	}
 
