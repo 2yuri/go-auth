@@ -12,21 +12,6 @@ func TestUser(t *testing.T) {
 		user := models.NewUser("name", "mail", "password")
 		require.NotNil(t, user)
 
-		id := user.GetId()
-		require.Zero(t, id)
-
-		name := user.GetName()
-		require.NotNil(t, name)
-
-		mail := user.GetEmail()
-		require.NotNil(t, mail)
-
-		pass := user.GetPassword()
-		require.NotNil(t, pass)
-
-		str := user.String()
-		require.NotNil(t, str)
-
 		withoutName := models.NewUser("", "mail", "password")
 		require.Nil(t, withoutName)
 
@@ -43,21 +28,6 @@ func TestUser(t *testing.T) {
 	{
 		user := models.NewUserWithId(1, "yuri", "mail", "password")
 		require.NotNil(t, user)
-
-		id := user.GetId()
-		require.NotNil(t, id)
-
-		name := user.GetName()
-		require.NotNil(t, name)
-
-		mail := user.GetEmail()
-		require.NotNil(t, mail)
-
-		pass := user.GetPassword()
-		require.NotNil(t, pass)
-
-		str := user.String()
-		require.NotNil(t, str)
 
 		withZeroID := models.NewUserWithId(0, "name", "mail", "")
 		require.Nil(t, withZeroID)

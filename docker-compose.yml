@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: .dockerfile
+    image: github.com/hyperyuri/go-auth
+    container_name: go-auth
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "25432:5432"
+    environment:
+      POSTGRES_DB: auth
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+      PGDATA: /var/lib/postgresql/data/go-auth
+    volumes:
+      - go-auth:/var/lib/postgresql/data
+
+volumes:
+  go-auth:

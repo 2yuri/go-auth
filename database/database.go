@@ -5,7 +5,6 @@ import (
 	"log"
 	"time"
 
-	"go-auth/config"
 	"go-auth/database/migrations"
 
 	"gorm.io/driver/postgres"
@@ -14,18 +13,10 @@ import (
 
 var db *gorm.DB
 
-func StartDatabase() {
-	DbHost := config.GetConfig().DatabaseHost
-	DbPort := config.GetConfig().DatabasePort
-	DbUser := config.GetConfig().DatabaseUser
-	DbName := config.GetConfig().DatabaseName
-	DbSSlMode := config.GetConfig().DatabaseSslMode
-	DbPass := config.GetConfig().DatabasePass
-	DbMaxIddleConns := config.GetConfig().DatabaseMaxIdleConns
-	DbMaxOpensConns := config.GetConfig().DatabaseMaxOpensConns
+func StartDB() {
+	str := "host=localhost port=25432 user=admin dbname=auth sslmode=disable password=123456"
 
-	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=%s password=%s", DbHost, DbPort, DbUser, DbName, DbSSlMode, DbPass)
-	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	database, err := gorm.Open(postgres.Open(str), &gorm.Config{})
 
 	if err != nil {
 		fmt.Println("Could not connect to the Postgres Database")
@@ -33,11 +24,9 @@ func StartDatabase() {
 	}
 
 	db = database
-
-	config, _ := database.DB()
-
-	config.SetMaxIdleConns(DbMaxIddleConns)
-	config.SetMaxOpenConns(DbMaxOpensConns)
+	config, _ := db.DB()
+	config.SetMaxIdleConns(10)
+	config.SetMaxOpenConns(100)
 	config.SetConnMaxLifetime(time.Hour)
 
 	migrations.RunAutoMigrations(db)

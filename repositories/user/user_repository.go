@@ -8,6 +8,18 @@ import (
 type UserRepository struct {
 }
 
+func (s UserRepository) GetByMail(mail string) (models.User, error) {
+	db := database.GetDatabase()
+
+	var user models.User
+	err := db.Where("email = ?", mail).First(&user).Error
+	if err != nil {
+		return models.User{}, err
+	}
+
+	return user, nil
+}
+
 func (s UserRepository) Get(id uint) (models.User, error) {
 	db := database.GetDatabase()
 
@@ -19,6 +31,7 @@ func (s UserRepository) Get(id uint) (models.User, error) {
 
 	return user, nil
 }
+
 func (s UserRepository) Create(user models.User) (models.User, error) {
 	db := database.GetDatabase()
 	err := db.Create(&user).Error

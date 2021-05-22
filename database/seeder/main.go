@@ -1,4 +1,4 @@
-package seeder
+package main
 
 import (
 	"bufio"
@@ -8,13 +8,11 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"go-auth/config"
 	"go-auth/database"
 )
 
 func main() {
-	config.Init()
-	database.StartDatabase()
+	database.StartDB()
 	defer database.CloseConn()
 
 	db := database.GetDatabase()

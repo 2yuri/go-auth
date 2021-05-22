@@ -1,18 +1,15 @@
 package main
 
 import (
-	"go-auth/models"
-	"log"
+	"go-auth/database"
+	"go-auth/server"
 )
 
 func main() {
-	// config.Init()
+	database.StartDB()
+	s := server.NewServer()
+	s.Run()
 
-	// database.StartDatabase()
-	// s := server.NewServer()
-	// s.Run()
-
-	va := models.NewUser("yuri", "yuri.snp@hotmail.com", "123456")
-	log.Print(va.String())
-
+	// u := models.NewUser("yuri", "yuri.miguel@ecocentauro.com.br", "123456")
+	// log.Print(u.Password)
 }

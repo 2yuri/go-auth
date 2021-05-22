@@ -1,13 +1,13 @@
 package user
 
 import (
-	"go-auth/dto/user"
 	"go-auth/models"
 )
 
 type UserRepository interface {
 	Get(id uint) (models.User, error)
-	Create(dto user.UserNewDTO) (models.User, error)
-	Edit(dto user.UserEditDTO) error
+	Create(dto models.User) (models.User, error)
+	Edit(dto models.User) error
 	Delete(id uint) error
+	GetByMail(mail string) (models.User, error)
 }
